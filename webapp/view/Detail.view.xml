@@ -1,0 +1,88 @@
+<mvc:View
+	controllerName="ns.supplierdash.controller.Detail"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+
+	<semantic:SemanticPage
+		id="detailPage"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}"
+        showFooter="true"
+        >
+		<semantic:titleHeading>
+			<Title id="oProTitle"
+				text="{ProjectTitle}"
+				level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+        	<l:HorizontalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+			<ObjectAttribute id="oProjectId"
+						title="Project ID"
+						text="{ID}"/>
+                        <ObjectAttribute
+						title="Department"
+						text="{Department_DepartmentID}"/>
+                        </l:VerticalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+                        <ObjectAttribute
+						title="Commodity"
+						text="{Commodity_UniqueName}"/>
+                         <ObjectAttribute
+						title="Region"
+						text="{Region_Region}"/>
+                        </l:VerticalLayout>
+                <l:VerticalLayout class="sapUiMediumMarginEnd">
+                         <ObjectAttribute title="Days Left" id="oDays" formatError="red"/>  
+                        </l:VerticalLayout>      
+			</l:HorizontalLayout>
+		</semantic:headerContent>
+		<semantic:content>
+        <form:SimpleForm editable="true" id="oAnsForm">
+
+                            <Text id="oCommodity" visible="false"/>
+                            
+                            <Text id="oRegion" visible="false"/>
+                           
+                            <Text id="oDepartment"  visible="false"/>
+
+                            <Text id="oQuestID" visible="false"/>                            	
+
+		</form:SimpleForm>
+       
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onSendEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:closeAction>
+			<semantic:CloseAction
+					id="closeColumn"
+					press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction
+					id="enterFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction
+					id="exitFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+					press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+        <semantic:footerCustomActions>
+            <Button id="oSave" text="Save" type="Accept" press="oSaveRequet" icon="sap-icon://accelerated" />
+			<Button id="oSubmit" text="Submit" type="Accept" press="oSubmitRequest" icon="sap-icon://create"/>
+		</semantic:footerCustomActions>
+	</semantic:SemanticPage>
+
+</mvc:View>

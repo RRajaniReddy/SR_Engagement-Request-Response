@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="RegionMasterTable" EntityType="CatalogService.RegionMasterTable"/>
+                <EntitySet Name="DepartmentMasterTable" EntityType="CatalogService.DepartmentMasterTable"/>
+                <EntitySet Name="CommodityMasterTable" EntityType="CatalogService.CommodityMasterTable"/>
+                <EntitySet Name="RiskControlMasterTable" EntityType="CatalogService.RiskControlMasterTable"/>
+                <EntitySet Name="AssessmentQuestionnaireTable" EntityType="CatalogService.AssessmentQuestionnaireTable"/>
+                <EntitySet Name="AnswerTypeMasterTable" EntityType="CatalogService.AnswerTypeMasterTable"/>
+                <EntitySet Name="PublishedQuestionnaire" EntityType="CatalogService.PublishedQuestionnaire"/>
+                <EntitySet Name="QuestionnaireApprovalGroups" EntityType="CatalogService.QuestionnaireApprovalGroups"/>
+                <EntitySet Name="ApprovalGroupParticipants" EntityType="CatalogService.ApprovalGroupParticipants"/>
+                <EntitySet Name="CustomSelectAnswers" EntityType="CatalogService.CustomSelectAnswers"/>
+                <EntitySet Name="AssessmentRequests" EntityType="CatalogService.AssessmentRequests"/>
+                <EntitySet Name="ResponseDetails" EntityType="CatalogService.ResponseDetails"/>
+                <EntitySet Name="ApproverGrading" EntityType="CatalogService.ApproverGrading"/>
+                <EntitySet Name="ApproverDetails" EntityType="CatalogService.ApproverDetails"/>
+                <EntitySet Name="ProjectApprovalGroupParticipants" EntityType="CatalogService.ProjectApprovalGroupParticipants"/>
+                <EntitySet Name="Grading" EntityType="CatalogService.Grading"/>
+                <EntitySet Name="ApproverFinalGradingScore" EntityType="CatalogService.ApproverFinalGradingScore"/>
+                <EntitySet Name="ProjectFinalGradingScore" EntityType="CatalogService.ProjectFinalGradingScore"/>
+                <FunctionImport Name="getdate" ReturnType="Edm.DateTime" m:HttpMethod="GET"/>
+                <FunctionImport Name="submitpublishquestionnaire" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="payloaddata" Type="Collection(CatalogService.PublishedQuestionnaire)" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <AssociationSet Name="AssessmentQuestionnaireTable_RiskControlID" Association="CatalogService.AssessmentQuestionnaireTable_RiskControlID">
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                    <End Role="RiskControlMasterTable" EntitySet="RiskControlMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentQuestionnaireTable_Commodity" Association="CatalogService.AssessmentQuestionnaireTable_Commodity">
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                    <End Role="CommodityMasterTable" EntitySet="CommodityMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentQuestionnaireTable_Region" Association="CatalogService.AssessmentQuestionnaireTable_Region">
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                    <End Role="RegionMasterTable" EntitySet="RegionMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentQuestionnaireTable_Department" Association="CatalogService.AssessmentQuestionnaireTable_Department">
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                    <End Role="DepartmentMasterTable" EntitySet="DepartmentMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentQuestionnaireTable_AnswerID" Association="CatalogService.AssessmentQuestionnaireTable_AnswerID">
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                    <End Role="AnswerTypeMasterTable" EntitySet="AnswerTypeMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="CustomSelectAnswers_QuestionnaireID" Association="CatalogService.CustomSelectAnswers_QuestionnaireID">
+                    <End Role="CustomSelectAnswers" EntitySet="CustomSelectAnswers"/>
+                    <End Role="AssessmentQuestionnaireTable" EntitySet="AssessmentQuestionnaireTable"/>
+                </AssociationSet>
+                <AssociationSet Name="CustomSelectAnswers_AnswerID" Association="CatalogService.CustomSelectAnswers_AnswerID">
+                    <End Role="CustomSelectAnswers" EntitySet="CustomSelectAnswers"/>
+                    <End Role="AnswerTypeMasterTable" EntitySet="AnswerTypeMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentRequests_Commodity" Association="CatalogService.AssessmentRequests_Commodity">
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                    <End Role="CommodityMasterTable" EntitySet="CommodityMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentRequests_Region" Association="CatalogService.AssessmentRequests_Region">
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                    <End Role="RegionMasterTable" EntitySet="RegionMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentRequests_Department" Association="CatalogService.AssessmentRequests_Department">
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                    <End Role="DepartmentMasterTable" EntitySet="DepartmentMasterTable"/>
+                </AssociationSet>
+                <AssociationSet Name="AssessmentRequests_QuestionnaireID" Association="CatalogService.AssessmentRequests_QuestionnaireID">
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                    <End Role="PublishedQuestionnaire" EntitySet="PublishedQuestionnaire"/>
+                </AssociationSet>
+                <AssociationSet Name="ResponseDetails_ProjectID" Association="CatalogService.ResponseDetails_ProjectID">
+                    <End Role="ResponseDetails" EntitySet="ResponseDetails"/>
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                </AssociationSet>
+                <AssociationSet Name="ApproverDetails_ProjectID" Association="CatalogService.ApproverDetails_ProjectID">
+                    <End Role="ApproverDetails" EntitySet="ApproverDetails"/>
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                </AssociationSet>
+                <AssociationSet Name="ProjectApprovalGroupParticipants_ProjectID" Association="CatalogService.ProjectApprovalGroupParticipants_ProjectID">
+                    <End Role="ProjectApprovalGroupParticipants" EntitySet="ProjectApprovalGroupParticipants"/>
+                    <End Role="AssessmentRequests" EntitySet="AssessmentRequests"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="RegionMasterTable">
+                <Key>
+                    <PropertyRef Name="Region"/>
+                </Key>
+                <Property Name="Region" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="510" Nullable="false"/>
+                <Property Name="ParentRegion" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="DepartmentMasterTable">
+                <Key>
+                    <PropertyRef Name="DepartmentID"/>
+                </Key>
+                <Property Name="DepartmentID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="510" Nullable="false"/>
+                <Property Name="ParentDepartment" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="CommodityMasterTable">
+                <Key>
+                    <PropertyRef Name="UniqueName"/>
+                </Key>
+                <Property Name="Domain" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="UniqueName" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="255" Nullable="false"/>
+                <Property Name="ParentUniqueName" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="RiskControlMasterTable">
+                <Key>
+                    <PropertyRef Name="ControlID"/>
+                </Key>
+                <Property Name="AssessmentIDs" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ContractClauseImpact" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ControlDescriptionMLS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ControlID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ControlName" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ControlOwner" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ControlOwnerType" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ControlType" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DecisionMaker" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DecisionMakerType" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="RegulatorMandated" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="RiskType" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="AssessmentQuestionnaireTable">
+                <Key>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="QuestionnaireName"/>
+                    <PropertyRef Name="QuestionID"/>
+                </Key>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <NavigationProperty Name="RiskControlID" Relationship="CatalogService.AssessmentQuestionnaireTable_RiskControlID" FromRole="AssessmentQuestionnaireTable" ToRole="RiskControlMasterTable"/>
+                <Property Name="RiskControlID_ControlID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="QuestionnaireName" Type="Edm.String" MaxLength="55" Nullable="false"/>
+                <Property Name="QuestionID" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="Commodity" Relationship="CatalogService.AssessmentQuestionnaireTable_Commodity" FromRole="AssessmentQuestionnaireTable" ToRole="CommodityMasterTable"/>
+                <Property Name="Commodity_UniqueName" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="Region" Relationship="CatalogService.AssessmentQuestionnaireTable_Region" FromRole="AssessmentQuestionnaireTable" ToRole="RegionMasterTable"/>
+                <Property Name="Region_Region" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="Department" Relationship="CatalogService.AssessmentQuestionnaireTable_Department" FromRole="AssessmentQuestionnaireTable" ToRole="DepartmentMasterTable"/>
+                <Property Name="Department_DepartmentID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Questions" Type="Edm.String" MaxLength="500" Nullable="false"/>
+                <Property Name="ScoringWeightage" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="AnswerID" Relationship="CatalogService.AssessmentQuestionnaireTable_AnswerID" FromRole="AssessmentQuestionnaireTable" ToRole="AnswerTypeMasterTable"/>
+                <Property Name="AnswerID_AnswerID" Type="Edm.String"/>
+                <Property Name="AnswerID_AnswerType" Type="Edm.String" MaxLength="99"/>
+            </EntityType>
+            <EntityType Name="AnswerTypeMasterTable">
+                <Key>
+                    <PropertyRef Name="AnswerID"/>
+                    <PropertyRef Name="AnswerType"/>
+                </Key>
+                <Property Name="AnswerID" Type="Edm.String" Nullable="false"/>
+                <Property Name="AnswerType" Type="Edm.String" MaxLength="99" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="PublishedQuestionnaire">
+                <Key>
+                    <PropertyRef Name="QuestionnaireID"/>
+                </Key>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="QuestionnaireName" Type="Edm.String" MaxLength="55" Nullable="false"/>
+                <Property Name="Publish" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="QuestionnaireApprovalGroups">
+                <Key>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="QuestionnaireName"/>
+                    <PropertyRef Name="ApprovalGroup"/>
+                </Key>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="QuestionnaireName" Type="Edm.String" MaxLength="55" Nullable="false"/>
+                <Property Name="ApprovalGroup" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="AllApprovalsRequired" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="ApprovalGroupParticipants">
+                <Key>
+                    <PropertyRef Name="ApprovalGroup"/>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="ApprovalGroup" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="UserID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="UserMail" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="CustomSelectAnswers">
+                <Key>
+                    <PropertyRef Name="Answer"/>
+                </Key>
+                <NavigationProperty Name="QuestionnaireID" Relationship="CatalogService.CustomSelectAnswers_QuestionnaireID" FromRole="CustomSelectAnswers" ToRole="AssessmentQuestionnaireTable"/>
+                <Property Name="QuestionnaireID_QuestionnaireID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="QuestionnaireID_QuestionnaireName" Type="Edm.String" MaxLength="55"/>
+                <Property Name="QuestionnaireID_QuestionID" Type="Edm.Int32"/>
+                <NavigationProperty Name="AnswerID" Relationship="CatalogService.CustomSelectAnswers_AnswerID" FromRole="CustomSelectAnswers" ToRole="AnswerTypeMasterTable"/>
+                <Property Name="AnswerID_AnswerID" Type="Edm.String"/>
+                <Property Name="AnswerID_AnswerType" Type="Edm.String" MaxLength="99"/>
+                <Property Name="Answer" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="AssessmentRequests">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProjectTitle" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <NavigationProperty Name="Commodity" Relationship="CatalogService.AssessmentRequests_Commodity" FromRole="AssessmentRequests" ToRole="CommodityMasterTable"/>
+                <Property Name="Commodity_UniqueName" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="Region" Relationship="CatalogService.AssessmentRequests_Region" FromRole="AssessmentRequests" ToRole="RegionMasterTable"/>
+                <Property Name="Region_Region" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="Department" Relationship="CatalogService.AssessmentRequests_Department" FromRole="AssessmentRequests" ToRole="DepartmentMasterTable"/>
+                <Property Name="Department_DepartmentID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Deadline" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="QuestionnaireID" Relationship="CatalogService.AssessmentRequests_QuestionnaireID" FromRole="AssessmentRequests" ToRole="PublishedQuestionnaire"/>
+                <Property Name="QuestionnaireID_QuestionnaireID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="RequestorName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ResponderUserType" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ResponderUserID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Project_Status" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="ResponseDetails">
+                <Key>
+                    <PropertyRef Name="ProjectID_ID"/>
+                    <PropertyRef Name="ProjectTitle"/>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="QuestionID"/>
+                </Key>
+                <NavigationProperty Name="ProjectID" Relationship="CatalogService.ResponseDetails_ProjectID" FromRole="ResponseDetails" ToRole="AssessmentRequests"/>
+                <Property Name="ProjectID_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProjectTitle" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="QuestionID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Question" Type="Edm.String" MaxLength="50"/>
+                <Property Name="AnswerType" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Response" Type="Edm.String" MaxLength="500"/>
+            </EntityType>
+            <EntityType Name="ApproverGrading">
+                <Key>
+                    <PropertyRef Name="ProjectID"/>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="QuestionID"/>
+                    <PropertyRef Name="ApproverID"/>
+                </Key>
+                <Property Name="ProjectID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="QuestionID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Question" Type="Edm.String" MaxLength="50"/>
+                <Property Name="AnswerType" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Response" Type="Edm.String" MaxLength="500"/>
+                <Property Name="ApproverID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Grade" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="ApproverDetails">
+                <Key>
+                    <PropertyRef Name="ProjectID_ID"/>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="ApprovalGroup"/>
+                </Key>
+                <NavigationProperty Name="ProjectID" Relationship="CatalogService.ApproverDetails_ProjectID" FromRole="ApproverDetails" ToRole="AssessmentRequests"/>
+                <Property Name="ProjectID_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="ApprovalGroup" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="UserID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="UserMail" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ApprovalStatus" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="ProjectApprovalGroupParticipants">
+                <Key>
+                    <PropertyRef Name="ProjectID_ID"/>
+                    <PropertyRef Name="QuestionnaireID"/>
+                    <PropertyRef Name="ApprovalGroup"/>
+                </Key>
+                <NavigationProperty Name="ProjectID" Relationship="CatalogService.ProjectApprovalGroupParticipants_ProjectID" FromRole="ProjectApprovalGroupParticipants" ToRole="AssessmentRequests"/>
+                <Property Name="ProjectID_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="ApprovalGroup" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="UserID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="UserMail" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Grading">
+                <Property Name="ProjectID" Type="Edm.Int32"/>
+                <Property Name="QuestionnaireID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="QuestionID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Question" Type="Edm.String" MaxLength="50"/>
+                <Property Name="AnswerType" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Response" Type="Edm.String" MaxLength="500"/>
+                <Property Name="Grade" Type="Edm.Int32"/>
+                <Property Name="ApproverID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ScoringWeightage" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Multiplication"/>
+            </EntityType>
+            <EntityType Name="ApproverFinalGradingScore">
+                <Property Name="ProjectID" Type="Edm.Int32"/>
+                <Property Name="ApproverID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Score" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="ProjectFinalGradingScore">
+                <Property Name="ProjectID" Type="Edm.Int32"/>
+                <Property Name="FinalScore" Type="Edm.Int32"/>
+            </EntityType>
+            <Association Name="AssessmentQuestionnaireTable_RiskControlID">
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="*"/>
+                <End Role="RiskControlMasterTable" Type="CatalogService.RiskControlMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="RiskControlMasterTable">
+                        <PropertyRef Name="ControlID"/>
+                    </Principal>
+                    <Dependent Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="RiskControlID_ControlID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentQuestionnaireTable_Commodity">
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="*"/>
+                <End Role="CommodityMasterTable" Type="CatalogService.CommodityMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="CommodityMasterTable">
+                        <PropertyRef Name="UniqueName"/>
+                    </Principal>
+                    <Dependent Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="Commodity_UniqueName"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentQuestionnaireTable_Region">
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="*"/>
+                <End Role="RegionMasterTable" Type="CatalogService.RegionMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="RegionMasterTable">
+                        <PropertyRef Name="Region"/>
+                    </Principal>
+                    <Dependent Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="Region_Region"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentQuestionnaireTable_Department">
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="*"/>
+                <End Role="DepartmentMasterTable" Type="CatalogService.DepartmentMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DepartmentMasterTable">
+                        <PropertyRef Name="DepartmentID"/>
+                    </Principal>
+                    <Dependent Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="Department_DepartmentID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentQuestionnaireTable_AnswerID">
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="*"/>
+                <End Role="AnswerTypeMasterTable" Type="CatalogService.AnswerTypeMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AnswerTypeMasterTable">
+                        <PropertyRef Name="AnswerID"/>
+                        <PropertyRef Name="AnswerType"/>
+                    </Principal>
+                    <Dependent Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="AnswerID_AnswerID"/>
+                        <PropertyRef Name="AnswerID_AnswerType"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CustomSelectAnswers_QuestionnaireID">
+                <End Role="CustomSelectAnswers" Type="CatalogService.CustomSelectAnswers" Multiplicity="*"/>
+                <End Role="AssessmentQuestionnaireTable" Type="CatalogService.AssessmentQuestionnaireTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AssessmentQuestionnaireTable">
+                        <PropertyRef Name="QuestionnaireID"/>
+                        <PropertyRef Name="QuestionnaireName"/>
+                        <PropertyRef Name="QuestionID"/>
+                    </Principal>
+                    <Dependent Role="CustomSelectAnswers">
+                        <PropertyRef Name="QuestionnaireID_QuestionnaireID"/>
+                        <PropertyRef Name="QuestionnaireID_QuestionnaireName"/>
+                        <PropertyRef Name="QuestionnaireID_QuestionID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CustomSelectAnswers_AnswerID">
+                <End Role="CustomSelectAnswers" Type="CatalogService.CustomSelectAnswers" Multiplicity="*"/>
+                <End Role="AnswerTypeMasterTable" Type="CatalogService.AnswerTypeMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AnswerTypeMasterTable">
+                        <PropertyRef Name="AnswerID"/>
+                        <PropertyRef Name="AnswerType"/>
+                    </Principal>
+                    <Dependent Role="CustomSelectAnswers">
+                        <PropertyRef Name="AnswerID_AnswerID"/>
+                        <PropertyRef Name="AnswerID_AnswerType"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentRequests_Commodity">
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="*"/>
+                <End Role="CommodityMasterTable" Type="CatalogService.CommodityMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="CommodityMasterTable">
+                        <PropertyRef Name="UniqueName"/>
+                    </Principal>
+                    <Dependent Role="AssessmentRequests">
+                        <PropertyRef Name="Commodity_UniqueName"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentRequests_Region">
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="*"/>
+                <End Role="RegionMasterTable" Type="CatalogService.RegionMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="RegionMasterTable">
+                        <PropertyRef Name="Region"/>
+                    </Principal>
+                    <Dependent Role="AssessmentRequests">
+                        <PropertyRef Name="Region_Region"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentRequests_Department">
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="*"/>
+                <End Role="DepartmentMasterTable" Type="CatalogService.DepartmentMasterTable" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DepartmentMasterTable">
+                        <PropertyRef Name="DepartmentID"/>
+                    </Principal>
+                    <Dependent Role="AssessmentRequests">
+                        <PropertyRef Name="Department_DepartmentID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssessmentRequests_QuestionnaireID">
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="*"/>
+                <End Role="PublishedQuestionnaire" Type="CatalogService.PublishedQuestionnaire" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="PublishedQuestionnaire">
+                        <PropertyRef Name="QuestionnaireID"/>
+                    </Principal>
+                    <Dependent Role="AssessmentRequests">
+                        <PropertyRef Name="QuestionnaireID_QuestionnaireID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ResponseDetails_ProjectID">
+                <End Role="ResponseDetails" Type="CatalogService.ResponseDetails" Multiplicity="*"/>
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AssessmentRequests">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ResponseDetails">
+                        <PropertyRef Name="ProjectID_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ApproverDetails_ProjectID">
+                <End Role="ApproverDetails" Type="CatalogService.ApproverDetails" Multiplicity="*"/>
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AssessmentRequests">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ApproverDetails">
+                        <PropertyRef Name="ProjectID_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ProjectApprovalGroupParticipants_ProjectID">
+                <End Role="ProjectApprovalGroupParticipants" Type="CatalogService.ProjectApprovalGroupParticipants" Multiplicity="*"/>
+                <End Role="AssessmentRequests" Type="CatalogService.AssessmentRequests" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="AssessmentRequests">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ProjectApprovalGroupParticipants">
+                        <PropertyRef Name="ProjectID_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="CatalogService.RegionMasterTable/Region" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DepartmentMasterTable/DepartmentID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.CommodityMasterTable/Domain" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.RiskControlMasterTable/AssessmentIDs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.AssessmentQuestionnaireTable/QuestionnaireID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.AnswerTypeMasterTable/AnswerID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.PublishedQuestionnaire/QuestionnaireID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.PublishedQuestionnaire/Publish" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Yes"/>
+                            <PropertyValue Property="Value" String="Yes"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="No"/>
+                            <PropertyValue Property="Value" String="No"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.QuestionnaireApprovalGroups/QuestionnaireName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.QuestionnaireApprovalGroups/AllApprovalsRequired" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Yes"/>
+                            <PropertyValue Property="Value" String="Yes"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="No"/>
+                            <PropertyValue Property="Value" String="No"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.ApprovalGroupParticipants/ApprovalGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.AssessmentRequests/ResponderUserType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Internal"/>
+                            <PropertyValue Property="Value" String="Internal"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Supplier"/>
+                            <PropertyValue Property="Value" String="Supplier"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.AssessmentRequests/Project_Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Open"/>
+                            <PropertyValue Property="Value" String="Open"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OpenWithSupplier"/>
+                            <PropertyValue Property="Value" String="OpenWithSupplier"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="OpenWithApprover"/>
+                            <PropertyValue Property="Value" String="OpenWithApprover"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Finished"/>
+                            <PropertyValue Property="Value" String="Finished"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.ApproverDetails/ApprovalStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.AllowedValues">
+                    <Collection>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Open"/>
+                            <PropertyValue Property="Value" String="Open"/>
+                        </Record>
+                        <Record Type="Validation.AllowedValue">
+                            <Annotation Term="Core.SymbolicName" String="Closed"/>
+                            <PropertyValue Property="Value" String="Closed"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.ProjectApprovalGroupParticipants/ApprovalGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Grading/Multiplication" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ApproverFinalGradingScore/Score" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ProjectFinalGradingScore/FinalScore" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
